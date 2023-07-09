@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks'
   }
 
-  resources :events, only: [:new, :create, :index]
+  resources :events, only: [:new, :create, :index, :show]
 
   # Defines the root path route ("/")
   # root "articles#index"

@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
   <h1>Welcome <%= current_user.username %>!</h1>
+  <p> <%= link_to 'Create Event', new_event_path %> </p>
   <p><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></p>
 <% else %>
   <h1>Welcome User!</h1>
@@ -9,7 +10,7 @@
 <% if @events.any? %>
   <ul>
     <% @events.each do |event| %>
-      <li> <%= @event.title %> </li>
+      <li> <%= link_to event.title, event  %> </li>
     <% end %>
   </ul>
 <% else %>
