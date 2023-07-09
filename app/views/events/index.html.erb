@@ -10,7 +10,12 @@
 <% if @events.any? %>
   <ul>
     <% @events.each do |event| %>
-      <li> <%= link_to event.title, event  %> </li>
+      <% if user_signed_in? %>
+        <h3><%= link_to event.title, event  %></h3>
+        <p><%= event.description %>
+      <% else %>
+        <p><%= link_to event.title, event  %></p>
+      <% end %>
     <% end %>
   </ul>
 <% else %>
