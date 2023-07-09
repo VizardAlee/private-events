@@ -1,0 +1,9 @@
+<%= form_with model: @event do |form| %>
+  <%= form.label :title, 'Title: ' %>
+  <%= form.text_field :title, placeholder: 'Title here ...' %><br><br>
+  <%= form.label :description, 'Description: ' %>
+  <%= form.text_area :description, placeholder: 'Description here ...' %><br><br>
+  <%= form.label :event_date, 'Date: ' %>
+  <%= form.date_field :event_date, placeholder: 'Choose date' %><br><br>
+  <%= form.submit 'Create Event' %>
+<% end %>
