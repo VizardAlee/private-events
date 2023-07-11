@@ -21,3 +21,9 @@
 <% else %>
   <p>No Events available yet</p>
 <% end %>
+<h1>Event Attendances</h1>
+<ul>
+  <% @event_attendances.each do |attendance| %>
+    <li><%= attendance.attendee.username %> is attending <%= attendance.attended_event.title %></li>
+  <% end %>
+</ul>

@@ -17,6 +17,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @event_attendances = EventAttendance.all
   end
 
   def show

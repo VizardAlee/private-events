@@ -3,4 +3,11 @@
 <p><strong>Description:</strong> <%= @event.description %></p>
 <p><strong>Date:</strong> <%= @event.event_date %></p>
 <p><strong>Creator:</strong> <%= @event.created_by.username %></p>
-<%= link_to 'Back', root_path %>
+<% if current_user.attended_events.exists?(id: @event.id) %>
+  <p>You are already attending this event</p>
+<% else %>
+  <%= form_with(url: event_event_attendances_path(event_id: @event.id), method: :post) do |form| %>
+    <%= form.submit 'Attend' %>
+  <% end %>
+<% end %>
+<p><%= link_to 'Back', root_path %></p>

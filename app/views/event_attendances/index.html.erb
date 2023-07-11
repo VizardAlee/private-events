@@ -1,0 +1,11 @@
+<h1>Event Attendances</h1>
+<ul>
+  <% if @event_attendances.any? %>
+    <% @event_attendances.each do |attendance| %>
+      <li><%= attendance.attendee.username %> is attending <%= attendance.attended_event.title %></li>
+    <% end %>
+  <% else %>
+    <p>No attendees yet!</p>
+  <% end %>
+</ul>
+<%= link_to 'Home', root_path %>

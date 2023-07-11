@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks'
   }
 
-  resources :events, only: [:new, :create, :index, :show]
-
+  resources :events, only: [:new, :create, :index, :show] do
+    resources :event_attendances, only: [:create, :destroy, :index]
+  end
   # Defines the root path route ("/")
   # root "articles#index"
   devise_scope :user do
