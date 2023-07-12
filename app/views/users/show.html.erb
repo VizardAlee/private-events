@@ -3,13 +3,24 @@
   <p>Welcome <%= @user.username %></p>
 
   <h2>Your Events</h2>
-  <% @user.created_events.each do |event| %>
+  <h3>Past Event</h3>
+  <% @user.created_events.where("event_date < ?", Time.now.midnight ).each do |event| %>
+    <p><%= event.title %></p>
+    <p><%= event.event_date %></p>
+  <% end %>
+  <h3>Pending Event</h3>
+  <% @user.created_events.where("event_date > ?", Time.now.midnight ).each do |event| %>
     <p><%= event.title %></p>
     <p><%= event.event_date %></p>
   <% end %>
 
-  <h2>Events you've attended</h2>
-  <% @user.attended_events.each do |event| %>
+  <h2>Events you're yet to attend</h2>
+  <% @user.attended_events.where("event_date > ?", Time.now.midnight ).each do |event| %>
+    <p><%= event.title %></p>
+    <p><%= event.event_date %></p>
+  <% end %>
+  <h2>Events you're you've attended</h2>
+  <% @user.attended_events.where("event_date < ?", Time.now.midnight ).each do |event| %>
     <p><%= event.title %></p>
     <p><%= event.event_date %></p>
   <% end %>
