@@ -9,24 +9,56 @@
 <% end %>
 <% if user_signed_in? %>
   <%= link_to 'User Profile', user_path(current_user) %>
-<% end %>
-<% if @events.any? %>
-  <ul>
-    <% @events.each do |event| %>
-      <% if user_signed_in? %>
-        <h3><%= link_to event.title, event  %></h3>
-        <p><%= event.description %>
-      <% else %>
-        <p><%= link_to event.title, event  %></p>
+  <% if @events.any? %>
+    <h2>Upcoming Events</h2>
+    <% if @events.upcoming.nil? %>
+      <p>No upcoming events</p>
+    <% else %>
+      <% @events.upcoming.each do |event| %>
+        <h3><%= link_to event.title, event %></h3>
+        <p><%= event.description %></p>
       <% end %>
     <% end %>
-  </ul>
-<% else %>
-  <p>No Events available yet</p>
-<% end %>
-<h1>Event Attendances</h1>
-<ul>
-  <% @event_attendances.each do |attendance| %>
-    <li><%= attendance.attendee.username %> is attending <%= attendance.attended_event.title %></li>
+    <h2>Past Events</h2>
+    <% if @events.past.nil? %>
+      <p>No past events</p>
+    <% else %>
+      <% @events.past.each do |event| %>
+        <h3><%= link_to event.title, event %></h3>
+        <p><%= event.description %></p>
+      <% end %>
+    <% end %>
+    <h1>Event Attendances</h1>
+    <ul>
+      <% @event_attendances.each do |attendance| %>
+        <li><%= attendance.attendee.username %> is attending <%= attendance.attended_event.title %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No Events available yet</p>
   <% end %>
-</ul>
+<% else %>
+  <% if @events.any? %>
+    <h2>Upcoming Events</h2>
+    <% if @events.upcoming.nil? %>
+      <p>No upcoming events</p>
+    <% else %>
+      <% @events.upcoming.each do |event| %>
+        <h3><%= event.title %></h3>
+        <p><%= event.description %></p>
+      <% end %>
+    <% end %>
+    <h2>Past Events</h2>
+    <% if @events.past.nil? %>
+      <p>No past events</p>
+    <% else %>
+      <% @events.past.each do |event| %>
+        <h3><%= event.title %></h3>
+        <p><%= event.description %></p>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p>No Events available yet</p>
+  <% end %>
+<% end %>
+
