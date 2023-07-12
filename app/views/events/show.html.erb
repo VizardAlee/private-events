@@ -2,7 +2,7 @@
 <p><strong>Title:</strong> <%= @event.title %></p>
 <p><strong>Description:</strong> <%= @event.description %></p>
 <p><strong>Date:</strong> <%= @event.event_date %></p>
-<p><strong>Creator:</strong> <%= @event.created_by.username %></p>
+<p><strong>Creator:</strong><%= link_to "#{@event.created_by.username}", user_path(@event.created_by) %></p>
 <% if current_user.attended_events.exists?(id: @event.id) %>
   <p>You are already attending this event</p>
 <% else %>

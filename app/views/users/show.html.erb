@@ -1,0 +1,31 @@
+<h1>User Page</h1>
+<% if @user.username == current_user.username %>
+  <p>Welcome <%= @user.username %></p>
+
+  <h2>Your Events</h2>
+  <% @user.created_events.each do |event| %>
+    <p><%= event.title %></p>
+    <p><%= event.event_date %></p>
+  <% end %>
+
+  <h2>Events you've attended</h2>
+  <% @user.attended_events.each do |event| %>
+    <p><%= event.title %></p>
+    <p><%= event.event_date %></p>
+  <% end %>
+<% else %>
+  <p>Welcome <%= current_user.username %></p>
+  <h2> <%=@user.username%>'s Events </h2>
+  <% @user.created_events.each do |event| %>
+    <p><%= event.title %></p>
+    <p><%= event.event_date %></p>
+  <% end %>
+  <h2>Events <%= @user.username %> has attended</h2>
+  <% @user.attended_events.each do |event| %>
+    <p><%= event.title %></p>
+    <p><%= event.event_date %></p>
+  <% end %>
+<% end %>
+
+
+<%= link_to 'back', root_path %>

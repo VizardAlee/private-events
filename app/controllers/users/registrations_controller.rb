@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -38,8 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
   def show
-    @user = User.find(params[:id])
-    @events = @user.events
+    @user = current_user
   end
 
   protected
@@ -56,8 +56,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
-
-  private
 
   def sign_up_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)

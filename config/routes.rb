@@ -11,12 +11,15 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks'
   }
 
-  resources :events, only: [:new, :create, :index, :show] do
-    resources :event_attendances, only: [:create, :destroy, :index]
-  end
+  resources :users, only: [:show]
+
   # Defines the root path route ("/")
   # root "articles#index"
   devise_scope :user do
-    get '/users/sign_out', to: 'devise/sessions#destroy'
+    delete '/users/sign_out', to: 'devise/sessions#destroy'
+  end
+
+  resources :events, only: [:new, :create, :index, :show] do
+    resources :event_attendances, only: [:create, :destroy, :index]
   end
 end

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_user, only: [:index, :show]
 
   def new
     @event = Event.new
@@ -28,5 +29,9 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :event_date)
+  end
+
+  def set_user
+    @user = current_user
   end
 end
